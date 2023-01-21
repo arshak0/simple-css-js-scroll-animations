@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <p>Arshak Ishkhanyan</p>
+    </header>
+    <div class="first_page">
+      <h1>Arshak Ishkhanyan animations example</h1>
+      <p>Some paragraph of text</p>
+      <div class="buttons_wrapper">
+        <button> Get it on Apple Store</button>
+        <button> Get it on Google Play</button>
+      </div>
+      <div class="phones_wrapper">
+        <div class="phone"></div>
+        <div class="phone"></div>
+        <div class="phone"></div>
+        <div class="processing">
+          <hr style="margin-top: 10px;"/>
+          <hr style="margin-top: 10px; margin-top: -11px; margin-left: -1px; rotate: 90deg;"/>
+        </div>
+      </div>
+    </div>
+    <div class="second_page"></div>
+    <div class="new_screen">
+      <h2>This is the new screen</h2>
+    </div>
+    
+  </body>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Sofia Sans';
+    }
+    header {
+      align-self: start;
+      height: 34px;
+      position: fixed;
+      padding-left: 15px;
+    }
+    .first_page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: calc( 100vh - 16px);
+    }
+    .second_page {
+      height: 100vh;
+    }
+    .new_screen {
+      width: 100vw;
+      height: 100vh;
+      background: aquamarine;
+      z-index: 15;
+      position: absolute;
+    }
+    .buttons_wrapper {
+      display: flex;
+      margin-top: 30px;
+    }
+    button {
+      background: black;
+      color: white;
+      border-radius: 10px;
+      padding: 5px;
+    }
+    button:nth-child(1) { margin-right: 20px; }
+
+    .phones_wrapper {
+      margin-top: 190px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 500px;
+    }
+    .phone:nth-child(1) {
+      width: 120px;
+      height: 240px;
+      margin-top: 50px;
+      background: yellow;
+      rotate: -20deg; }
+    .phone:nth-child(2) {
+      width: 170px;
+      height: 300px;
+      background: green;
+      z-index: 10; }
+    .phone:nth-child(3) {
+      width: 120px;
+      height: 240px;
+      margin-top: 50px;
+      background: red;
+      rotate: 20deg; }
+    .phone {
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+    .processing {
+      width: 20px;
+      height: 20px;
+      background: yellow;
+      position: absolute;
+      right: 10px;
+      top: 400px;
+      border: 1px solid green;
+      border-radius: 15px;
+      transform-origin: -10px -10px;
+      z-index: 20;
+    }
+
+    @keyframes rotation_circle {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <script>
+    window.addEventListener("scroll", (event) => {
+      //console.log(window.pageYOffset);
+      if ( window.pageYOffset <= 150 ) {
+        document.getElementsByClassName('phones_wrapper')[0].style='';
+        document.getElementsByClassName('processing')[0].style='';
+      }
+      else if( window.pageYOffset > 150 && window.pageYOffset <= 230 ) {
+        document.getElementsByClassName('phones_wrapper')[0].style='position:fixed; bottom: 158px;';
+        document.getElementsByClassName('processing')[0].style='position: fixed; top: 250px;';
+      }
+      else if ( window.pageYOffset > 230 && window.pageYOffset <= 330) {
+        document.getElementsByClassName('processing')[0].style='position: fixed; top: 250px; animation: rotation_circle 2s infinite linear;';
+        var diff_var = window.pageYOffset - 230;
+        document.getElementsByClassName('phone')[0].style='display: block; margin-left:'+diff_var+'px';
+        document.getElementsByClassName('phone')[1].style='margin-left:-'+diff_var+'px';
+        document.getElementsByClassName('phone')[2].style='display: block; margin-left:-'+diff_var+'px';
+      }
+      else if ( window.pageYOffset > 330  && window.pageYOffset <= 430) {
+        var diff_var = window.pageYOffset - 330;
+        document.getElementsByClassName('phone')[0].style='display:none';
+        document.getElementsByClassName('phone')[1].style='width:'+(170+diff_var)+'px;height:'+(300+diff_var)+'px';
+        document.getElementsByClassName('phone')[2].style='display:none';
+      }
+      else if ( window.pageYOffset > 430  && window.pageYOffset <= 615) {
+        var diff_var = window.pageYOffset - 430;
+        document.getElementsByClassName('phone')[1].style='width:'+(170+diff_var)+'px;height:'+(300+diff_var)+'px;rotate: '+diff_var+'deg';
+      }
+      else if ( window.pageYOffset > 615) {
+        var diff_var = window.pageYOffset - 615;
+        document.getElementsByClassName('processing')[0].style='position: fixed; top: 250px; animation: rotation_circle 2s infinite linear; transform-origin: -100px -100px;right:'+(10+diff_var)+'px';
+        if (window.pageYOffset > 1350) {
+          document.getElementsByClassName('processing')[0].style='';
+        }
+      }
+    });
+  </script>
+</html>
