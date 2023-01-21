@@ -1,4 +1,4 @@
-# This is a simple page, developed on HTML, CSS and Vanilla JS
+# This is a simple page, developed on HTML and CSS
 
 ## Project requirements:
 This is a page with a lot of basic animations
